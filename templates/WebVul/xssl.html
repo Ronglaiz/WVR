@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Xss Injection</title>
+    <script src="/static/js/jquery-3.6.1.js"></script>
+    <script>
+    $(function () {
+        $('#query_vul').click(function () {
+            var csrftoken = $('[name="csrfmiddlewaretoken"]').val()
+            $.ajax({
+                // 这里的逻辑是：inser_vul插入数据到数据库，并且查出所有数据传递给回调函数，回调函数拼装table数据并且显示
+                url:'/query_vul/',
+                type:'get',
+            })})})
+</script>
+
+        <style>
+        #center{
+            text-align: center;
+            }
+        </style>
+</head>
+
+<body id = center>
+<h1>Xss Injection</h1>
+<div style="text-align: center;">
+    <h2><input type="button" id="query_vul" value="查询漏洞信息" onclick=""></h2>
+</div>
+<table border="1" style="margin: auto;" width=’60%’>
+    <!-- 表格标题 -->
+    <caption>漏洞信息</caption>
+    <thread>
+    <tr>
+        <th>漏洞编号</th>
+        <th>漏洞名称</th>
+        <th>漏洞描述</th>
+    </tr>
+    </thread>
+    <tbody>
+    {% for vul in vul_list %}
+    <tr>
+        <td>{{ vul.vul_id }}</td>
+        <td>{{ vul.vul_name}}</td>
+        <td>{{ vul.vul_desc }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    {% csrf_token %}
+</body>
+</html>

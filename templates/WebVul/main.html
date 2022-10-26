@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <script src="/static/js/jquery-3.6.1.js"></script>
+    <script></script>
+    <style>
+        #center{
+        background-color: #FFFFFF;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -150px;
+        margin-top: -150px;
+    }
+    </style>
+</head>
+<body id="center">
+    <h1>Hello {{ username }} ,<a href="/logout/">注销用户</a></h1>
+<h1>请选择：</h1>
+<table border="1">
+    <tr>
+        <td><a href="/sqli" id="vul_1">Sql Injection</a></td>
+        <td><a href="/xssi" id="vul_2">Xss Injection</a></td>
+        <td><a href="/cmdi" id="vul_3">Cmd Injection</a></td>
+    </tr>
+</table>
+    {% csrf_token %}
+</body>
+</html>

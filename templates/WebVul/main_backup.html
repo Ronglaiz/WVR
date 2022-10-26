@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <script src="/static/js/jquery-3.6.1.js"></script>
+    <script>
+            $(function () {
+        $('#ajaxbtn').click(function () {
+            let username = $('#username').val();
+            let password = $('#password').val();
+            var csrftoken = $('[name="csrfmiddlewaretoken"]').val()
+            $.ajax({
+                url:'/login_handle/',
+                type:'post',
+                data:{'username':username, 'password':password, 'csrfmiddlewaretoken': csrftoken},
+                dataType:'json',
+                //回调函数
+                success:function (data) {
+                //如果返回是1，则表示登录成功,跳转至首页
+                //如果返回是0，则表示登录失败
+                    if (data.res === 0){
+                        $('#errmsg').show().html('账号或密码错误')
+
+                    }else{
+                        location.href = '/main_page'
+                    }}})})})
+</script>
+    <style>
+        #center{
+        background-color: #FFFFFF;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -150px;
+        margin-top: -150px;
+    }
+    </style>
+</head>
+<body id="center">
+    漏洞查询：<input type="text" id="vul_name">
+    <input type="button" id="vulbtn" value="查询">
+
+<table>
+    <tr>
+        <td><div id="errmsg"></div></td>
+        <td><div id="errmsg2"></div></td>
+        <td><div id="errmsg3"></div></td>
+    </tr>
+</table>
+    {% csrf_token %}
+</body>
+</html>
