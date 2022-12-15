@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UnAuthorization Access</title>
+    <style>
+        #center{
+            text-align: center;
+            }
+    </style>
+</head>
+<body id=center>
+<h1>{{ unauth_type }}：查看用户信息</h1>
+<h3>Hello {{ username }} ,<a href="/logout/">注销用户</a></h3>
+<h3><a href="/main_page/">主页</a></h3>
+<h3><a href="/unauth" id="vul_1">返回</a></h3>
+<div style="text-align: center;">
+    <span>
+        {{ server_response_unauth }}
+    </span>
+</div>
+    {% csrf_token %}
+</body>
+</html>

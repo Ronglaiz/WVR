@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Brute Force</title>
+        <script src="/static/js/jquery-3.6.1.js"></script>
+        <style>
+        #center{
+            text-align: center;
+            }
+        </style>
+</head>
+<body id = center>
+<h1>暴力破解</h1>
+    <h3>Hello {{ username }} ,<a href="/logout/">注销用户</a></h3>
+<h3><a href="/main_page/">主页</a></h3>
+<br>
+<br>
+<span>===============================================================================================</span>
+<form action='/query_normal/' method="post">
+    <h3>普通登录</h3>
+            <div class="form-group">
+                <!-- 用户名 -->
+                {{ normal_form.username.label_tag }}
+                {{ normal_form.username }}
+                <!-- 密码 -->
+                {{ normal_form.password.label_tag }}
+                {{ normal_form.password }}
+                <button type="submit" >确定</button>
+            {% if message3 %}
+                {{ message3 }}
+            {% endif %}
+            </div>
+    <br>
+    <span>{{ server_response }}</span>
+</form>
+<br>
+<span>===============================================================================================</span>
+<form action='/query_by_rainbow/' method="post">
+    <h3>彩虹表攻击</h3>
+    <label>你猜我的明文是啥:</label>
+    <label><b>de30f4ed64a614089b1ecb0a6f039ac3</b></label>
+    <div class="form-group">
+
+        <!-- 明文 -->
+        {{ rainbow_form.plaintext.label_tag }}
+        {{ rainbow_form.plaintext }}
+        <button type="submit" >确定</button>
+            {% if message2 %}
+                {{ message2 }}
+            {% endif %}
+
+    </div>
+<br>
+<br>
+<span>===============================================================================================</span>
+</form>
+
+    <form  action="/query_with_captcha/" method="post">
+         <h3 class="text-center bg-info p-2 text-white mb-0">验证码登录</h3>
+            <div class="form-group">
+                <!-- 用户名 -->
+                {{ login_form.username.label_tag }}
+                {{ login_form.username }}
+                <!-- 密码 -->
+                {{ login_form.password.label_tag }}
+                {{ login_form.password }}
+                <!-- 验证码 -->
+                {{ login_form.captcha.label_tag }}
+                {{ login_form.captcha }}
+                <button type="submit" >确定</button>
+                <!-- 验证码报错 -->
+                <!--
+                {{ login_form.captcha.errors }}
+                -->
+            {% if message %}
+                {{ message }}
+            {% endif %}
+
+            </div>
+    </form>
+<br>
+<br>
+<span>===============================================================================================</span>
+</body>
+</html>

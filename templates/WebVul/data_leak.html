@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>敏感信息泄漏</title>
+    <script src="/static/js/jquery-3.6.1.js"></script>
+        <style>
+        #center{
+            text-align: center;
+            }
+        </style>
+</head>
+<body id = center>
+<h1>敏感信息泄漏</h1>
+    <h3>Hello {{ username }} ,<a href="/logout/">注销用户</a></h3>
+<h3><a href="/main_page/">主页</a></h3>
+<br>
+{{ server_response }}
+<br>
+<input type="hidden" value = "{'name'':'zrl','Email':'zrl@wvr.com' }"/>
+</body>
+</html>

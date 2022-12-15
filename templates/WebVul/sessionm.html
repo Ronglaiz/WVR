@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Session Management</title>
+            <style>
+        #center{
+            text-align: center;
+            }
+        </style>
+</head>
+<body id = center>
+<h1>Session Management</h1>
+<h3>Hello {{ username }} ,<a href="/logout/">注销用户</a></h3>
+<h3><a href="/main_page/">主页</a></h3>
+<h1>会话管理的类型</h1>
+<h2>1️⃣服务端session管理登录凭证</h2>
+<h4>✅优点： 比较安全，sessionid串足够随机，不容易被冒充</h4>
+<h4>❎缺点：
+    <br>1）这种方式将会话信息存储在web服务器里面，所以在用户同时在线量比较多时，这些会话信息会占据比较多的内存；
+    <br>2）当应用采用集群部署的时候，会遇到多台web服务器之间如何做session共享的问题。因为session是由单个服务器创建的，但是处理用户请求的服务器不一定是那个创建session的服务器，这样他就拿不到之前已经放入到session中的登录凭证之类的信息了；
+    <br>3）多个应用要共享session时，除了以上问题，还会遇到跨域问题，因为不同的应用可能部署的主机不一样，需要在各个应用做好cookie跨域的处理。
+    <br>针对问题1和问题2，有的解决方案是采用redis这种中间服务器来管理session的增删改查，一来减轻web服务器的负担，二来解决不同web服务器共享session的问题。针对问题3，由于服务端的session依赖cookie来传递sessionid，所以在实际项目中，只要解决各个项目里面如何实现sessionid的cookie跨域访问即可，这个是可以实现的，就是比较麻烦，前后端有可能都要做处理。
+    <br>如果不考虑以上三个问题，这种管理方式比较值得使用，尤其是一些小型的web应用。但是一旦应用将来有扩展的必要，那就得谨慎对待前面的三个问题。如果真要在项目中使用这种方式，推荐结合单点登录框架如CAS一起用，这样会使应用的扩展性更强。
+</h4>
+<h2>2️⃣客户端的cookie管理登录凭证</h2>
+<h4>✅优点：  服务端无状态化。用户信息共享问题处理简易</h4>
+<h4>❎缺点：
+    <br>1）cookie有大小限制
+    <br>2）每次传送cookie，增加了请求的数量，对访问性能也有影响；
+    <br>3）也有跨域问题，毕竟还是要用cookie。
+</h4>
+<h2>3️⃣使用token进行会话管理</h2>
+<h4>✅优点：使用JWT(json-web-token)标准， 可以应用在native app跟web的api之间的传输</h4>
+<h4>❎缺点：
+    <br>token或者ticket的自动刷新问题，解决方案可以是:
+     <br>可以在验证ticket或token有效之后，自动把ticket或token的失效时间延长，然后把它再返回给客户端；客户端如果检测到服务器有返回新的ticket或token，就替换原来的ticket或token。
+</h4>
+</body>
+</html>

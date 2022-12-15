@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传</title>
+        <script src="/static/js/jquery-3.6.1.js"></script>
+        <style>
+        #center{
+            text-align: center;
+            }
+        </style>
+</head>
+<body id = center>
+<h1>文件上传</h1>
+    <h3>Hello {{ username }} ,<a href="/logout/">注销用户</a></h3>
+<h3><a href="/main_page/">主页</a></h3>
+<div style="text-align: center;">
+    <h2>简单上传文件:</h2>
+    <!-- 使用form表单 -->
+    <form  action="/fileu_detail_simple/" enctype="multipart/form-data" method="post">
+       <input type="file" name="upload_file_simple" />
+       <input type="submit" value="上传"/>
+        {{ response_to_page }}
+    </form>
+
+    <h2>基于表单上传文件:</h2>
+    <!-- 使用form表单 -->
+    <form  action="/fileu_detail_form/" enctype="multipart/form-data" method="post">
+       {{ upload_form }}
+       <input type="submit" name="upload_file_form" value="上传"/>
+        {{ response_to_page_form }}
+    </form>
+</div>
+    {% csrf_token %}
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册用户</title>
+    <script src="/static/js/jquery-3.6.1.js"></script>
+    <script>
+    $(function () {
+        $('#register').click(function () {
+            let user_name = $('#user_name').val();
+            let password_1 = $('#password_1').val();
+            let password_2 = $('#password_2').val();
+            let email = $('#email').val();
+            let level = $('#level').val();
+            let csrftoken = $('[name="csrfmiddlewaretoken"]').val()
+            $.ajax({
+                // 这里的逻辑是：query_vul_by_id 根据id查询数据库数据，回调函数拼装table数据并且显示
+                url:'/register_admin_detail/',
+                type:'post',
+                data:{'user_name':user_name, 'password_1':password_1, 'password_2':password_2, 'email':email, 'level': level, 'csrfmiddlewaretoken': csrftoken},
+                dataType:'json',
+                //回调函数
+
+                success:function (data) {
+                    if (data.res === 1){
+                        $('#errmsg').show().html(data.errmsg)
+                    }else{
+                        $('#errmsg').show().html(data.errmsg)
+                    }
+                }})})})
+    </script>
+        <style>
+        #center{
+            text-align: center;
+            }
+        #errmsg{
+        display: none;
+        color: red;
+            }
+        </style>
+</head>
+<body id = center>
+<h1>注册用户</h1>
+    <h3>Hello {{ username }} ,<a href="/logout/">注销用户</a></h3>
+<h3><a href="/main_page/">主页</a></h3>
+    <!-- 使用form表单 -->
+    <!-- ><form action='/register_detail' method="post">< -->
+        <table  border="1" style="margin: auto;" width=’60%’>
+            <tr>
+                <td>用户名：</td>
+                <td><input type="text" name="user_name" id="user_name"></td>
+            </tr>
+            <tr>
+                <td>密码</td>
+                <td><input type="password" name="password_1" id="password_1"></td>
+            </tr>
+            <tr>
+                <td>再次输入密码</td>
+                <td><input type="password" name="password_2" id = "password_2"></td>
+            </tr>
+            <tr>
+                <td>邮箱</td>
+                <td><input type="text" name="email" id ="email"></td>
+            </tr>
+            <tr>
+                <td><label for="lang">权限</label></td>
+                <td>
+                    <select name="level" id="level">
+                        <option value="admin">管理员</option>
+                        <option value="normal">普通用户</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="注册" id="register">
+        <span id="errmsg"></span>
+    <!-- ></form>< -->
+</body>
+</html>

@@ -3,8 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>Sql Injection</title>
+    <script src="/static/js/jquery-3.6.1.js"></script>
+
+    <script>
+    $(function () {
+        $('#query_vul_by_id').click(function () {
+            let vul_id = $('#vul_id').val();
+            var csrftoken = $('[name="csrfmiddlewaretoken"]').val()
+            $.ajax({
+                // 这里的逻辑是：query_vul_by_id 根据id查询数据库数据，回调函数拼装table数据并且显示
+                url:'/query_vul_by_id/',
+                type:'post',
+                data:{'vul_id':vul_id, 'csrfmiddlewaretoken': csrftoken},
+                dataType:'json',
+                //回调函数
+
+                success:function (data) {
+
+                    if (data.res === 2){
+                        $('#errmsg').show().html('请输入信息！')
+                    }else if(data.res === 1){
+                        $('#vul_info').html(data.html_return_string)
+                        $('#errmsg').show().html('查询成功！')
+                    }else{
+                        $('#errmsg').show().html('查询失败！')
+                    }}})})})
+    </script>
+        <style>
+        #center{
+            text-align: center;
+            }
+        </style>
 </head>
-<body>
+
+<body id = center>
 <h1>Sql Injection</h1>
+<h3>Hello {{ username }} ,<a href="/logout/">注销用户</a></h3>
+<h3><a href="/main_page/">主页</a></h3>
+<div style="text-align: center;">
+    <h2>查询指定漏洞信息:</h2>
+    <input type="text" id="vul_id" name = "vul_ids" placeholder="根据漏洞ID查询：">
+    <input type="button" id="query_vul_by_id" value="确定" >
+    <span id="errmsg"></span>
+</div>
+<table border="1" style="margin: auto;" width=’60%’>
+    <!-- 表格标题 -->
+    <caption>漏洞信息</caption>
+    <thread>
+    <tr>
+        <th>漏洞编号</th>
+        <th>漏洞名称</th>
+        <th>漏洞描述</th>
+    </tr>
+    </thread>
+    <tbody id = "vul_info">
+    </tbody>
+</table>
+{% csrf_token %}
 </body>
 </html>

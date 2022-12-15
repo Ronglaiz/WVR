@@ -9,12 +9,13 @@
         $('#insert_vul').click(function () {
             let vul_name = $('#vul_name').val();
             let vul_desc = $('#vul_desc').val();
-            var csrftoken = $('[name="csrfmiddlewaretoken"]').val()
+            //var csrftoken = $('[name="csrfmiddlewaretoken"]').val()
             $.ajax({
                 // 这里的逻辑是：inser_vul插入数据到数据库，并且查出所有数据传递给回调函数，回调函数拼装table数据并且显示
                 url:'/insert_vul/',
                 type:'post',
-                data:{'vul_name':vul_name, 'vul_desc':vul_desc, 'csrfmiddlewaretoken': csrftoken},
+                //data:{'vul_name':vul_name, 'vul_desc':vul_desc, 'csrfmiddlewaretoken': csrftoken},
+                data:{'vul_name':vul_name, 'vul_desc':vul_desc},
                 dataType:'json',
                 //回调函数
 
@@ -24,7 +25,6 @@
                         $('#errmsg').show().html('请输入信息！！')
 
                     }else if(data.res === 1){
-
                         $('#errmsg').show().html('插入'+ data.vul_name + '成功!')
                     }else{
                         $('#errmsg').show().html('插入失败！')
@@ -41,6 +41,7 @@
 <body id = center>
 <h1>Xss Injection</h1>
 <h3>Hello {{ username }} ,<a href="/logout/">注销用户</a></h3>
+<h3><a href="/main_page/">主页</a></h3>
 <div style="text-align: center;">
     <h2>插入一条漏洞信息:</h2>
     <input type="text" id="vul_name" placeholder=" 漏洞名称：">
@@ -71,6 +72,5 @@
     {% endfor %}
     </tbody>
 </table>
-    {% csrf_token %}
 </body>
 </html>

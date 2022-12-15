@@ -6,7 +6,7 @@
     <script src="/static/js/jquery-3.6.1.js"></script>
     <script>
     $(function () {
-        $('#ajaxbtn').click(function () {
+        $('#login').click(function () {
             let username = $('#username').val();
             let password = $('#password').val();
             let csrftoken = $('[name="csrfmiddlewaretoken"]').val()
@@ -47,9 +47,11 @@
 <div id="center">
     账号：<input type="text" id="username"></br>
     密码：<input type="password" id="password"></br>
-    <input type="button" id="ajaxbtn" value="登录">
-    {% csrf_token %}
     <div id="errmsg"></div>
+    <br>
+    <input type="button" id="login" value="登录">
+    <a href="/register" id="vul_3">注册</a>
+    {% csrf_token %}
 </div>
 </body>
 </html>

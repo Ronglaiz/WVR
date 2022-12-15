@@ -2,26 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Command Injection</title>
-           <style>
+    <title>SSRF</title>
+    <script src="/static/js/jquery-3.6.1.js"></script>
+    <script>
+</script>
+
+        <style>
         #center{
             text-align: center;
             }
         </style>
 </head>
+
 <body id = center>
-<h1>Command Injection</h1>
+<h1>SSRF</h1>
 <h3>Hello {{ username }} ,<a href="/logout/">注销用户</a></h3>
 <h3><a href="/main_page/">主页</a></h3>
 <div style="text-align: center;">
-    <h2>查看服务器状态:</h2>
+    <h2>查看漏洞详情:</h2>
     <!-- 使用form表单 -->
-    <form action='/query_server_status' method="get">
-    <input type="text" id="cmd" name = "cmd" placeholder="输入IP地址：">
+    <form action='/query_vul_details' method="get">
+    <input type="text" id="vul_info" name = "vul_info" placeholder="输入漏洞描述：">
     <input type="submit" value="确定" >
     <br>
-    <span>{{ server_status }}</span>
+    <span>
+        {{ server_response }}
+    </span>
     </form>
 </div>
+    {% csrf_token %}
 </body>
 </html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSRF</title>
+    <script src="/static/js/jquery-3.6.1.js"></script>
+        <style>
+        #center{
+            text-align: center;
+            }
+        </style>
+</head>
+
+<body id = center>
+<h1>CSRF</h1>
+<h3>Hello {{ username }} ,<a href="/logout/">注销用户</a></h3>
+<h3><a href="/main_page/">主页</a></h3>
+<form action='/insert_vul_csrf/' method="post">
+    <input type="text" name="vul_name" placeholder="漏洞名称：" />
+    <input type="text" name="vul_desc" placeholder="漏洞描述：" >
+    <input type='hidden' name="csrf_token" value="{{ csrf_token }}" />
+    <input type="submit" value="确定" >
+    <br>
+    <span>{{ server_response }}</span>
+</form>
+<div style="text-align: center;">
+    <h2>有问题的链接：把这个链接嵌入其他page里</h2>
+    <h2>http://127.0.0.1:8000/insert_vul/</h2>
+    <h2>没问题的链接：把这个链接嵌入其他page里</h2>
+    <h2></h2>
+</div>
+</body>
+</html>

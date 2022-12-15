@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文件下载</title>
+        <script src="/static/js/jquery-3.6.1.js"></script>
+        <style>
+        #center{
+            text-align: center;
+            }
+        </style>
+</head>
+<body id = center>
+<h1>文件下载</h1>
+    <h3>Hello {{ username }} ,<a href="/logout/">注销用户</a></h3>
+<h3><a href="/main_page/">主页</a></h3>
+<br>
+{% for file in files_name %}
+<tr>
+    <td><a href="/filed_detail/?name={{ file }}">{{ file }}</a></td>
+</tr>
+<br>
+{% endfor %}
+</form>
+</body>
+</html>

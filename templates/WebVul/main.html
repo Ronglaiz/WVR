@@ -17,15 +17,40 @@
     </style>
 </head>
 <body id="center">
-    <h1>Hello {{ username }} ,<a href="/logout/">注销用户</a></h1>
-<h1>请选择：</h1>
-<table border="1">
+<div name = "hello" style="position: absolute;left: 150px;top: -300px">Hello {{ username }} ,<a href="/logout/">注销用户</a></div>
+<div style="position: absolute;left: 0px;top: -100px">
+    <table border="1">
+        <tr>请选择:</tr>
+        <tr>
+        <td><a href="/vul_pages">漏洞相关的学习文章</a></td>
+        </tr>
+    </table>
+</div>
+<div>
+    <table border="1">
+    <tr>请选择:</tr>
     <tr>
-        <td><a href="/sqli" id="vul_1">Sql Injection</a></td>
-        <td><a href="/xssi" id="vul_2">Xss Injection</a></td>
-        <td><a href="/cmdi" id="vul_3">Cmd Injection</a></td>
+        <td><a href="/sqli" id="vul_1">SQL注入</a></td>
+        <td><a href="/xssi" id="vul_2">XSS注入</a></td>
+        <td><a href="/cmdi" id="vul_3">命令注入</a></td>
+    </tr>
+    <tr>
+        <td><a href="/ssrf" id="vul_1">SSRF</a></td>
+        <td><a href="/csrf" id="vul_2">CSRF</a></td>
+        <td><a href="/sessionm" id="vul_3">会话管理</a></td>
+    </tr>
+    <tr>
+        <td><a href="/brutef" id="vul_1">暴力破解</a></td>
+        <td><a href="/filed" id="vul_2">文件下载</a></td>
+        <td><a href="/fileu" id="vul_3">文件上传</a></td>
+    </tr>
+    <tr>
+        <td><a href="/unauth" id="vul_1">越权访问</a></td>
+        <td><a href="/data_leak" id="vul_2">敏感信息泄露</a></td>
+        <td><a href="/register_admin" id="vul_3">注册模块缺陷</a></td>
     </tr>
 </table>
+</div>
     {% csrf_token %}
 </body>
 </html>
