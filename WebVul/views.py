@@ -1,7 +1,6 @@
 import json
 import os
 import re
-from pathlib import Path
 
 import requests
 from django.http import HttpResponse, JsonResponse, Http404, FileResponse
@@ -15,6 +14,8 @@ import hashlib
 from pathlib import Path
 
 BASE_PATH = Path(__file__).resolve().parent.parent
+
+
 # Create your views here.
 # 定义视图函数
 def index(request):
